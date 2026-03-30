@@ -152,10 +152,28 @@ function updateGlow() {
 }
 updateGlow();
 
-// ── NAVBAR SCROLL ──
+// ── SMOOTH PARALLAX & NAVBAR ──
 const nav = document.getElementById('navbar');
+let scrollTicking = false;
+
 window.addEventListener('scroll', () => {
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  if (!scrollTicking) {
+    window.requestAnimationFrame(() => {
+      const scrollY = window.pageYOffset;
+      
+      // Navbar
+      if (nav) nav.classList.toggle('scrolled', scrollY > 50);
+      
+      // Parallax
+      const g1 = document.querySelector('.hero-glow-1');
+      const g2 = document.querySelector('.hero-glow-2');
+      if (g1) g1.style.transform = `translate(0, ${scrollY * 0.12}px)`;
+      if (g2) g2.style.transform = `translate(0, ${scrollY * -0.08}px)`;
+      
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
 });
 
 // ── SCROLL REVEAL ──
@@ -229,15 +247,6 @@ if (typewriterEl) {
   setTimeout(typewrite, 1800);
 }
 
-// ── SMOOTH PARALLAX ──
-window.addEventListener('scroll', () => {
-  const scrollY = window.pageYOffset;
-  const g1 = document.querySelector('.hero-glow-1');
-  const g2 = document.querySelector('.hero-glow-2');
-  if (g1) g1.style.transform = `translate(0, ${scrollY * 0.12}px)`;
-  if (g2) g2.style.transform = `translate(0, ${scrollY * -0.08}px)`;
-});
-
 // ── MAGNETIC BUTTONS ──
 document.querySelectorAll('.btn-primary, .nav-cta, .dc-actions button').forEach(btn => {
   btn.addEventListener('mousemove', (e) => {
@@ -277,3 +286,78 @@ if (mobileBtn) {
     mobileBtn.classList.toggle('active');
   });
 }
+
+// ── MARKET PARTICLES ──
+const mParticlesContainer = document.getElementById('market-particles');
+if (mParticlesContainer) {
+  const famousStocks = [
+    { ticker: 'RELIANCE', price: '₹2,950', change: '+1.2%', up: true },
+    { ticker: 'TCS', price: '₹4,120', change: '-0.5%', up: false },
+    { ticker: 'HDFCBANK', price: '₹1,440', change: '+0.8%', up: true },
+    { ticker: 'INFY', price: '₹1,530', change: '+1.5%', up: true },
+    { ticker: 'ICICIBANK', price: '₹1,120', change: '-0.2%', up: false },
+    { ticker: 'SBIN', price: '₹830', change: '+2.1%', up: true },
+    { ticker: 'ZOMATO', price: '₹247', change: '+4.5%', up: true },
+    { ticker: 'TATAMOTORS', price: '₹980', change: '-1.1%', up: false },
+    { ticker: 'ITC', price: '₹420', change: '+0.3%', up: true }
+  ];
+
+  const maxParticles = 18;
+
+  function createMarketParticle(isInitial = false) {
+    const stock = famousStocks[Math.floor(Math.random() * famousStocks.length)];
+    const el = document.createElement('div');
+    el.className = `stock-particle ${stock.up ? 'up' : 'down'}`;
+    
+    // Choose random starting position
+    const x = Math.random() * 100;
+    el.style.left = `${x}%`;
+    
+    // Create inner content with arrows
+    const arrow = stock.up ? '↑' : '↓';
+    el.innerHTML = `<span>${stock.ticker}</span> <span>${stock.change}</span> <span>${arrow}</span>`;
+    
+    // Randomize opacity based on theme but keep it very subtle
+    const isLight = getTheme() === 'light';
+    const baseOpacity = isLight ? (Math.random() * 0.15 + 0.05) : (Math.random() * 0.2 + 0.05);
+    el.style.opacity = baseOpacity.toString();
+    
+    mParticlesContainer.appendChild(el);
+    
+    const containerHeight = window.innerHeight;
+    
+    // If initial load, scatter them across the height instead of bottom
+    let yPos = isInitial ? Math.random() * containerHeight : -50;
+    el.style.bottom = '0px'; 
+    el.style.transform = `translateY(-${yPos}px)`;
+    
+    let speed = Math.random() * 0.8 + 0.3; // Very slow and subtle
+    
+    function animate() {
+      yPos += speed;
+      el.style.transform = `translateY(-${yPos}px)`;
+      
+      const documentHeight = window.innerHeight;
+      if (yPos > documentHeight + 100) {
+        // Reset properties instead of destroying so it loops forever
+        const newStock = famousStocks[Math.floor(Math.random() * famousStocks.length)];
+        el.className = `stock-particle ${newStock.up ? 'up' : 'down'}`;
+        const newArrow = newStock.up ? '↑' : '↓';
+        el.innerHTML = `<span>${newStock.ticker}</span> <span>${newStock.change}</span> <span>${newArrow}</span>`;
+        el.style.left = `${Math.random() * 100}%`;
+        speed = Math.random() * 0.8 + 0.3;
+        yPos = -50;
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    requestAnimationFrame(animate);
+  }
+  
+  // Seed initial particles scattered across screen
+  for (let i = 0; i < maxParticles; i++) {
+    createMarketParticle(true);
+  }
+}
+

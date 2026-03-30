@@ -27,6 +27,19 @@
   <!-- AMBIENT CANVAS -->
   <canvas id="ambient-canvas"></canvas>
 
+  <!-- STOCK GRAPH LINES (BACKGROUND) -->
+  <div class="bg-stock-graphs">
+    <svg class="bg-stock-graph sg-1" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <path d="M0,1000 L100,900 L200,950 L300,700 L400,800 L500,500 L600,600 L700,300 L800,400 L900,100 L1000,0" fill="none" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <svg class="bg-stock-graph sg-2" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <path d="M0,1000 L150,920 L250,960 L400,600 L500,750 L650,400 L750,500 L850,200 L950,250 L1000,0" fill="none" stroke="currentColor" stroke-width="2" />
+    </svg>
+  </div>
+
+  <!-- PARTICLES CONTAINER (GLOBAL FLOW) -->
+  <div id="market-particles"></div>
+
   <!-- CURSOR GLOW -->
   <div class="cursor-glow"></div>
 
@@ -52,12 +65,20 @@
 
       <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#decision-card">How It Works</a>
-        <a href="#intelligence">Document Intel</a>
-        <a href="#advisor">Advisor</a>
+        <div class="nav-dropdown">
+          <a href="#" class="dropbtn">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="dd-icon"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></a>
+          <div class="nav-dropdown-content">
+            <a href="#explain-stock">Stock Analysis</a>
+            <a href="#explain-portfolio">Portfolio Doctor</a>
+            <a href="#explain-advisor">Financial Advisor</a>
+            <a href="#explain-eli15">Explain Like I'm 15</a>
+          </div>
+        </div>
+        <a href="#userflow">How It Works</a>
+        <a href="#pricing">Pricing</a>
       </div>
 
-      <div class="nav-actions">
+      <div class="nav-actions" style="margin-left: auto; padding-left: 20px;">
         <!-- Theme Toggle -->
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
           <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -70,10 +91,7 @@
         </button>
 
         <a href="#cta" class="nav-cta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
-          </svg>
-          Sign in with Google
+          Sign In
         </a>
       </div>
 
@@ -107,31 +125,15 @@
         decision to take. Fintur tells you exactly what to do with any stock.
       </p>
 
-      <!-- SEARCH BAR (Locked - visible but requires auth) -->
-      <div class="hero-search">
-        <div class="search-bar-hero">
-          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-          </svg>
-          <input type="text" placeholder="Search any NSE / BSE stock..." disabled />
-          <button class="analyse-locked-btn" disabled>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
-            Sign in to Analyse
-          </button>
-        </div>
-        <p class="search-hint">Try: ZOMATO, TATA MOTORS, INFOSYS, TITAN</p>
-      </div>
-
-      <div class="hero-actions">
-        <a href="#cta" class="btn-primary">
-          <span>Start Free Trial</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <div class="hero-actions" style="margin-top: 32px;">
+        <a href="#cta" class="btn-primary" style="padding: 18px 54px; font-size: 17px; min-width: 280px; justify-content: center; letter-spacing: 0.5px;">
+          <span>Get Started Now</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
       </div>
+
     </div>
 
     <!-- Floating stats -->
@@ -181,399 +183,285 @@
     </div>
   </div>
 
-  <!-- PROBLEM → SOLUTION STATEMENT -->
-  <section class="statement-section" id="problem">
-    <div class="statement-inner reveal">
-      <div class="section-label">The Problem</div>
-      <h2 class="statement-text">
-        Existing platforms give you <span class="strike">charts and dashboards</span>.<br>
-        Fintur gives you a <em class="highlight">decision</em>.
-      </h2>
-      <p class="statement-sub">
-        You can access every data point, every chart, every financial ratio online — but still not know whether to buy, hold, or sell.
-        That's decision paralysis. Fintur eliminates it.
-      </p>
-    </div>
-  </section>
-
-  <!-- FEATURES SECTION -->
-  <section class="features-section" id="features">
-    <div class="features-inner">
-      <div class="features-header reveal">
-        <div class="section-label">What Fintur Offers</div>
-        <h2 class="section-title">Four features.<br>One decision engine.</h2>
-        <p class="section-sub">From deep stock research to personal financial advisory — Fintur covers every angle of your investment journey.</p>
-      </div>
-
-      <div class="features-grid">
-        <!-- Feature 1: Stock Analysis (PRIMARY) -->
-        <div class="feature-card primary reveal" style="transition-delay:0.1s">
-          <div class="feature-badge">Core Feature</div>
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M21 21H4.6c-.56 0-.84 0-1.054-.109a1 1 0 0 1-.437-.437C3 20.24 3 19.96 3 19.4V3"/>
-              <path d="m7 14 4-4 4 4 6-6"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Stock Analysis</h3>
-          <p class="feature-desc">Enter any NSE or BSE ticker. Fintur reads annual reports, financials, technicals, and management commentary — then produces a visual decision card with a clear Buy, Hold, or Sell verdict.</p>
-          <div class="feature-tags">
-            <span class="ftag">Annual Reports</span>
-            <span class="ftag">Technicals</span>
-            <span class="ftag">Document AI</span>
-          </div>
+  <div class="middle-wrapper">
+    <!-- FEATURES SECTION -->
+    <section class="features-section" id="features">
+      <div class="features-inner">
+        <div class="features-header reveal">
+          <div class="section-label">What Fintur Offers</div>
+          <h2 class="section-title">Four features.<br>One decision engine.</h2>
+          <p class="section-sub">From deep stock research to personal financial advisory — Fintur covers every angle of your investment journey.</p>
         </div>
 
-        <!-- Feature 2: ELI15 (WOW) -->
-        <div class="feature-card wow reveal" style="transition-delay:0.2s">
-          <div class="feature-badge wow-badge">Wow Feature</div>
-          <div class="feature-icon-wrap eli15">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Explain Like I'm 15</h3>
-          <p class="feature-desc">One button rewrites the entire analysis in plain, jargon-free language. No financial background required. This is Fintur's most emotionally resonant feature.</p>
-          <div class="eli15-example">
-            <div class="eli15-quote">"It's like a shop selling more stuff than ever, but somehow making less money each year."</div>
-          </div>
-        </div>
-
-        <!-- Feature 3: Portfolio Doctor -->
-        <div class="feature-card reveal" style="transition-delay:0.3s">
-          <div class="feature-badge">Side Feature</div>
-          <div class="feature-icon-wrap doctor">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M9 12h6m-3-3v6m-7 4h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Portfolio Doctor</h3>
-          <p class="feature-desc">Upload your stock and mutual fund holdings. Fintur scans for overexposure, sector concentration, and delivers rebalance suggestions with a portfolio health score.</p>
-          <div class="feature-tags">
-            <span class="ftag">Health Score</span>
-            <span class="ftag">Rebalance</span>
-          </div>
-        </div>
-
-        <!-- Feature 4: Financial Advisor -->
-        <div class="feature-card reveal" style="transition-delay:0.4s">
-          <div class="feature-badge">Side Feature</div>
-          <div class="feature-icon-wrap advisor">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Financial Advisor</h3>
-          <p class="feature-desc">A conversational AI chatbot that collects your financial picture and returns 'Your personal investment plan' — a percentage split tailored to your income, goals, and timeline.</p>
-          <div class="feature-tags">
-            <span class="ftag">Chatbot</span>
-            <span class="ftag">Goal-based</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VISUAL DECISION CARD DEMO -->
-  <section class="decision-card-section" id="decision-card">
-    <div class="dc-layout">
-      <div class="dc-text reveal">
-        <div class="section-label">The Output</div>
-        <h2 class="section-title">Not a report.<br>A <em>decision card</em>.</h2>
-        <p class="section-sub">Fintur's output is a visual, structured, color-coded decision card — scannable in 5 seconds. The verdict sits at the top. The reasoning follows.</p>
-
-        <div class="dc-highlights">
-          <div class="dc-hl">
-            <div class="dc-hl-icon">⚡</div>
-            <div>
-              <strong>Scannable in 5 seconds</strong>
-              <span>Color and layout do the work — no reading required</span>
+        <div class="features-grid">
+          <!-- Feature 1: Stock Analysis -->
+          <div class="feature-card reveal" style="transition-delay:0.1s">
+            <div class="feature-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 21H4.6c-.56 0-.84 0-1.054-.109a1 1 0 0 1-.437-.437C3 20.24 3 19.96 3 19.4V3"/>
+                <path d="m7 14 4-4 4 4 6-6"/>
+              </svg>
             </div>
-          </div>
-          <div class="dc-hl">
-            <div class="dc-hl-icon">🎯</div>
-            <div>
-              <strong>Decision-first hierarchy</strong>
-              <span>Verdict + confidence score at the top, reasoning below</span>
-            </div>
-          </div>
-          <div class="dc-hl">
-            <div class="dc-hl-icon">🧠</div>
-            <div>
-              <strong>Dual-depth design</strong>
-              <span>Beginners get ELI15. Advanced users get the full metrics.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MOCK DECISION CARD -->
-      <div class="dc-card-wrap reveal" style="transition-delay:0.2s">
-        <div class="decision-card">
-          <!-- Stock Header -->
-          <div class="dc-header">
-            <div class="dc-stock-info">
-              <div class="dc-stock-name">Zomato Ltd</div>
-              <div class="dc-stock-meta">NSE: ZOMATO · Food Delivery & Quick Commerce</div>
-            </div>
-            <div class="dc-stock-price">
-              <div class="dc-cmp">₹247.80</div>
-              <div class="dc-range">52W: ₹124 — ₹310</div>
+            <h3 class="feature-title">Stock Analysis</h3>
+            <p class="feature-desc">Enter any NSE or BSE ticker. Fintur reads annual reports, financials, technicals, and management commentary — then produces a visual decision card with a clear verdict.</p>
+            <div class="feature-tags">
+              <span class="ftag">Annual Reports</span>
+              <span class="ftag">Technicals</span>
+              <span class="ftag">Document AI</span>
             </div>
           </div>
 
-          <!-- Verdict Banner -->
-          <div class="dc-verdict buy-verdict">
-            <div class="dc-verdict-left">
-              <span class="verdict-label">BUY</span>
-              <span class="verdict-trend">↗ Bullish Momentum</span>
+          <!-- Feature 2: Portfolio Doctor -->
+          <div class="feature-card reveal" style="transition-delay:0.2s">
+            <div class="feature-icon-wrap doctor">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 12h6m-3-3v6m-7 4h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/>
+              </svg>
             </div>
-            <div class="dc-confidence">
-              <span class="confidence-num">87%</span>
-              <span class="confidence-label">Confidence</span>
-            </div>
-          </div>
-
-          <!-- Metrics Row -->
-          <div class="dc-metrics">
-            <div class="dc-metric">
-              <div class="dc-metric-label">Revenue YoY</div>
-              <div class="dc-metric-value up">+68.5%</div>
-            </div>
-            <div class="dc-metric">
-              <div class="dc-metric-label">PAT YoY</div>
-              <div class="dc-metric-value up">+241%</div>
-            </div>
-            <div class="dc-metric">
-              <div class="dc-metric-label">EBITDA Margin</div>
-              <div class="dc-metric-value up">4.8%</div>
-            </div>
-            <div class="dc-metric">
-              <div class="dc-metric-label">Net Debt/EBITDA</div>
-              <div class="dc-metric-value neutral">-2.1x</div>
+            <h3 class="feature-title">Portfolio Doctor</h3>
+            <p class="feature-desc">Upload your stock and mutual fund holdings. Fintur scans for overexposure, sector concentration, and delivers rebalance suggestions with a portfolio health score.</p>
+            <div class="feature-tags">
+              <span class="ftag">Health Score</span>
+              <span class="ftag">Rebalance</span>
             </div>
           </div>
 
-          <!-- Red Flags -->
-          <div class="dc-flags">
-            <div class="dc-flag-title">⚠ Risk Flags</div>
-            <div class="dc-flag-item">
-              <span class="flag-dot"></span>
-              High valuation premium — PE at 312x vs sector avg 45x
+          <!-- Feature 3: Financial Advisor -->
+          <div class="feature-card reveal" style="transition-delay:0.3s">
+            <div class="feature-icon-wrap advisor">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/>
+              </svg>
             </div>
-            <div class="dc-flag-item">
-              <span class="flag-dot"></span>
-              Quick commerce burn rate accelerating — watch cash position
-            </div>
-            <div class="dc-flag-item">
-              <span class="flag-dot"></span>
-              Competitive intensity from Swiggy IPO and Zepto fundraise
+            <h3 class="feature-title">Financial Advisor</h3>
+            <p class="feature-desc">A conversational AI chatbot that collects your financial picture and returns 'Your personal investment plan' — a percentage split tailored to your income, goals, and timeline.</p>
+            <div class="feature-tags">
+              <span class="ftag">Chatbot</span>
+              <span class="ftag">Goal-based</span>
             </div>
           </div>
 
-          <!-- Risk Pills -->
-          <div class="dc-risk-row">
-            <span class="dc-risk-pill high">Valuation HIGH</span>
-            <span class="dc-risk-pill med">Execution MED</span>
-            <span class="dc-risk-pill low">Earnings LOW</span>
-            <span class="dc-risk-pill low">Governance LOW</span>
-            <span class="dc-risk-pill med">Macro MED</span>
-          </div>
-
-          <!-- ELI15 Block -->
-          <div class="dc-eli15">
-            <div class="dc-eli15-label">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <!-- Feature 4: ELI15 -->
+          <div class="feature-card reveal" style="transition-delay:0.4s">
+            <div class="feature-icon-wrap eli15">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
               </svg>
-              Explain Like I'm 15
             </div>
-            <p>Imagine an app that everyone in India uses to order food. It was losing money for years, but now it's finally starting to earn. It's also opening super-fast grocery delivery stores everywhere. The stock is expensive though — like paying ₹300 for something worth ₹50 today, betting it'll be worth ₹500 tomorrow. If you believe in the story, it's a good bet. But don't put all your money here.</p>
+            <h3 class="feature-title">Explain Like I'm 15</h3>
+            <p class="feature-desc">One button rewrites the entire analysis in plain, jargon-free language. No financial background required. This is Fintur's most emotionally resonant feature.</p>
+            <div class="eli15-example">
+              <div class="eli15-quote">"It's like a shop selling more stuff than ever, but somehow making less money each year."</div>
+            </div>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="dc-actions">
-            <button class="dc-btn-save">💾 Save Report</button>
-            <button class="dc-btn-full">📄 Full Report</button>
-            <button class="dc-btn-new">🔄 Analyse Another</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW SECTION 1: Stock Analysis Explained -->
+    <section class="explain-section" id="explain-stock">
+      <div class="explain-inner reveal">
+        <div class="explain-text">
+          <div class="section-label">01. Stock Analysis</div>
+          <h2 class="section-title">Institutional grade research, packed into a card.</h2>
+          <p class="section-sub">
+            Traditional reports span thousands of pages. Fintur reads them using advanced Document AI, synthesizes the core drivers, and presents a visual 'Decision Card'. Get an instant verdict, key fundamental metric shifts, and highlighted risk flags in a unified, instantly accessible view.
+          </p>
+        </div>
+        <div class="explain-visual">
+          <div class="sc-mockup">
+            <div class="sc-top">
+              <div class="sc-ticker">ETERNAL</div>
+              <div class="sc-verdict-tag">BUY 87%</div>
+            </div>
+            <div class="sc-metrics-grid">
+              <div class="sc-m"><span class="sc-l">Rev YoY</span><span class="sc-v up">+68.5%</span></div>
+              <div class="sc-m"><span class="sc-l">EBITDA</span><span class="sc-v up">4.8%</span></div>
+            </div>
+            <div class="sc-bar"><div class="sc-bar-fill" style="width: 87%"></div></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- DOCUMENT INTELLIGENCE -->
-  <section class="intel-section" id="intelligence">
-    <div class="intel-inner">
-      <div class="intel-text reveal">
-        <div class="section-label">Deepest Edge</div>
-        <h2 class="section-title">Fintur reads<br><em>between the lines</em>.</h2>
-        <p class="section-sub">Most AI tools crunch numbers. Fintur reads the actual text of annual reports and cross-references management claims against the financial data.</p>
-      </div>
-
-      <div class="intel-showcase reveal" style="transition-delay:0.2s">
-        <div class="intel-card">
-          <div class="intel-card-header">
-            <div class="intel-icon-red">🔍</div>
-            <div>
-              <div class="intel-company">Rajesh Exports — FY25 Annual Report</div>
-              <div class="intel-tag">Document Intelligence Example</div>
+    <!-- NEW SECTION 2: Portfolio Doctor Explained -->
+    <section class="explain-section alt" id="explain-portfolio">
+      <div class="explain-inner reveal">
+        <div class="explain-visual">
+          <div class="pd-mockup" style="display: flex; align-items: center; gap: 20px;">
+            <div class="pd-left">
+              <div class="pd-circle" style="margin: 0; width: 100px; height: 100px;">
+                <span class="pd-score" style="font-size: 28px;">72</span>
+                <span class="pd-score-sub" style="font-size: 10px;">Health</span>
+              </div>
             </div>
-          </div>
-
-          <div class="intel-finding">
-            <div class="intel-claim">
-              <div class="intel-side-label">Management Claim</div>
-              <p>"The company continues to maintain its debt-free status and strong balance sheet position."</p>
-            </div>
-            <div class="intel-vs">VS</div>
-            <div class="intel-reality">
-              <div class="intel-side-label">Actual Data Found</div>
-              <p>Balance sheet shows <strong>₹921 Cr in short-term borrowings</strong> — a direct contradiction flagged as a <span class="intel-red-flag">governance red flag</span>.</p>
-            </div>
-          </div>
-
-          <div class="intel-bottom">
-            <span class="intel-badge-red">🔴 Governance Red Flag Detected</span>
-            <span class="intel-note">No chart-based tool catches this.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARISON SECTION -->
-  <section class="compare-section">
-    <div class="compare-inner reveal">
-      <div class="section-label">Why Fintur</div>
-      <h2 class="section-title" style="text-align:center;">How Fintur compares</h2>
-
-      <div class="compare-table-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Platform</th>
-              <th>What They Offer</th>
-              <th>Fintur's Edge</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="ct-name">ChatGPT / Gemini</td>
-              <td>Answers if you know what to ask</td>
-              <td class="ct-edge">Fintur asks nothing — it already knows what to analyse</td>
-            </tr>
-            <tr>
-              <td class="ct-name">Groww / Zerodha</td>
-              <td>Charts, data, price history</td>
-              <td class="ct-edge">Fintur gives a verdict, not a dashboard</td>
-            </tr>
-            <tr>
-              <td class="ct-name">Zerodha Varsity</td>
-              <td>Educational content, learning</td>
-              <td class="ct-edge">Fintur teaches while deciding — ELI15 mode</td>
-            </tr>
-            <tr>
-              <td class="ct-name">Smallcase</td>
-              <td>Pre-built curated portfolios</td>
-              <td class="ct-edge">Fintur builds a plan around your specific goals</td>
-            </tr>
-            <tr>
-              <td class="ct-name">Manual Research</td>
-              <td>4 hours to 4 days</td>
-              <td class="ct-edge">Same depth in under 60 seconds</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADVISOR PREVIEW -->
-  <section class="advisor-preview" id="advisor">
-    <div class="adv-layout">
-      <div class="adv-chat reveal">
-        <div class="adv-chat-header">
-          <div class="adv-avatar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/>
-            </svg>
-          </div>
-          <div>
-            <div class="adv-name">Fintur Advisor</div>
-            <div class="adv-status"><span class="status-dot"></span>Online · Personal Finance AI</div>
-          </div>
-        </div>
-
-        <div class="adv-chat-body">
-          <div class="chat-msg bot">Hi! I'll build your personal investment plan. What's your monthly income?</div>
-          <div class="chat-msg user">I earn ₹1.2L/month. I'm 26, want to save for a house in 5 years.</div>
-          <div class="chat-msg bot">
-            <strong>Your personal investment plan:</strong><br><br>
-            <span class="alloc-pill eq">📈 Equity MF — 40%</span>
-            <span class="alloc-pill st">💼 Direct Stocks — 20%</span>
-            <span class="alloc-pill db">🏛 Debt / FD — 25%</span>
-            <span class="alloc-pill gd">🪙 Gold ETF — 10%</span>
-            <span class="alloc-pill lq">💧 Emergency — 5%</span>
-            <br><br>
-            <em>Based on your ₹72K annual investable surplus, you're on track for a ₹22L down payment in 5 years.</em>
-          </div>
-        </div>
-
-        <div class="adv-chat-input">
-          <input type="text" placeholder="Ask about your finances…" disabled />
-          <button class="adv-send" disabled>↑</button>
-        </div>
-      </div>
-
-      <div class="reveal" style="transition-delay:0.2s">
-        <div class="section-label">Financial Advisor</div>
-        <h2 class="section-title">Your private wealth manager,<br><em>always on</em></h2>
-        <p class="section-sub" style="margin-bottom:32px;">A conversational AI that collects your complete financial picture and delivers 'Your personal investment plan' — not generic advice, but a percentage split tailored to your exact situation.</p>
-
-        <div class="adv-features-list">
-          <div class="adv-feat">
-            <div class="adv-feat-icon">📋</div>
-            <div>
-              <strong>Collects your full profile</strong>
-              <span>Income, expenses, goals, timelines, risk tolerance</span>
-            </div>
-          </div>
-          <div class="adv-feat">
-            <div class="adv-feat-icon">🎯</div>
-            <div>
-              <strong>Goal-wise breakdown</strong>
-              <span>Shows which allocation serves which financial goal</span>
-            </div>
-          </div>
-          <div class="adv-feat">
-            <div class="adv-feat-icon">📊</div>
-            <div>
-              <strong>Timeline projections</strong>
-              <span>When you'll reach each goal at the recommended pace</span>
+            <div class="pd-right" style="flex: 1; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 2;">
+              <div class="pd-metric">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+                  <span>EQUITY</span><span>65%</span>
+                </div>
+                <div class="sc-bar"><div class="sc-bar-fill" style="width: 65%;"></div></div>
+              </div>
+              <div class="pd-metric">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+                  <span>DEBT</span><span>25%</span>
+                </div>
+                <div class="sc-bar"><div class="sc-bar-fill" style="width: 25%; background: var(--amber);"></div></div>
+              </div>
+              <div class="pd-metric">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+                  <span>GOLD</span><span>10%</span>
+                </div>
+                <div class="sc-bar"><div class="sc-bar-fill" style="width: 10%; background: var(--mint);"></div></div>
+              </div>
             </div>
           </div>
         </div>
+        <div class="explain-text">
+          <div class="section-label">02. Portfolio Doctor</div>
+          <h2 class="section-title">Diagnose and heal your investments.</h2>
+          <p class="section-sub">
+            Your portfolio might be carrying hidden risks. Upload your holdings, and Fintur will scan for sectoral overexposure, highlight underperforming assets, and provide actionable rebalancing strategies. Optimize your weightings to handle market volatility with ease.
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- NEW SECTION 3: Financial Advisor Explained -->
+    <section class="explain-section" id="explain-advisor">
+      <div class="explain-inner reveal">
+        <div class="explain-text">
+          <div class="section-label">03. Financial Advisor</div>
+          <h2 class="section-title">A personal wealth manager in your pocket.</h2>
+          <p class="section-sub">
+            Share your income, goals, and risk appetite through a natural conversational interface. The Fintur Advisor processes your unique financial footprint and builds a personalized, step-by-step investment plan — telling you exactly how to split your savings across asset classes to hit your milestones.
+          </p>
+        </div>
+        <div class="explain-visual">
+          <div class="adv-mockup">
+            <div class="adv-msg bot">I'll build your plan. What's your monthly income?</div>
+            <div class="adv-msg user">₹1.2L/month. Want a house in 5 years.</div>
+            <div class="adv-msg bot">Plan Ready:<br>Equity MF — 40%<br>Debt/FD — 25%<br>Direct Stocks — 20%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW SECTION 4: ELI15 Explained -->
+    <section class="explain-section alt" id="explain-eli15">
+      <div class="explain-inner reveal">
+        <div class="explain-visual">
+           <div class="eli-mockup">
+             <div class="eli-raw">"EBITDA margin compression driven by escalated CAC and aggressive market penetration..."</div>
+             <div class="eli-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+             </div>
+             <div class="eli-clean">"They are spending entirely too much on ads to grab new users, hurting their profits."</div>
+           </div>
+        </div>
+        <div class="explain-text">
+          <div class="section-label">04. Explain Like I'm 15</div>
+          <h2 class="section-title">Finance, translated.</h2>
+          <p class="section-sub">
+            Finance has a language barrier. Fintur shatters it. Toggle ELI15 mode on any report to instantly translate complex jargon, intricate balance sheet ratios, and corporate speak into simple, everyday analogies that anyone can understand and act upon.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- USERFLOW CHART SECTION -->
+    <section class="userflow-section" id="userflow">
+      <div class="userflow-inner reveal">
+        <div class="section-label" style="text-align:center;">The Platform Flow</div>
+        <h2 class="section-title" style="text-align:center;">How you grow with Fintur</h2>
+        
+        <div class="uf-chart">
+           <div class="uf-step">
+             <div class="uf-icon">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+             </div>
+             <div>
+               <div class="uf-title">1. Profile Creation</div>
+               <div class="uf-desc">Input your basic details to establish your foundational investor profile and personalized financial metrics.</div>
+             </div>
+           </div>
+
+           <div class="uf-connector"></div>
+
+           <div class="uf-step">
+             <div class="uf-icon">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+             </div>
+             <div>
+               <div class="uf-title">2. Discovery</div>
+               <div class="uf-desc">Search for prospective stocks or upload your existing portfolio holdings for deep scanning.</div>
+             </div>
+           </div>
+
+           <div class="uf-connector"></div>
+
+           <div class="uf-step">
+             <div class="uf-icon">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+             </div>
+             <div>
+               <div class="uf-title">3. Engine Processing</div>
+               <div class="uf-desc">Fintur's proprietary Document AI reads reports, crunches numbers, and flags structural risks.</div>
+             </div>
+           </div>
+
+           <div class="uf-connector"></div>
+
+           <div class="uf-step">
+             <div class="uf-icon">
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3"/></svg>
+             </div>
+             <div>
+               <div class="uf-title">4. Clear Decisions</div>
+               <div class="uf-desc">Receive definitive verdicts, health scores, and an actionable roadmap forward.</div>
+             </div>
+           </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PRICING SECTION -->
+    <section class="pricing-section" id="pricing">
+      <div class="pricing-inner reveal">
+        <div class="section-label" style="text-align:center;">Pricing</div>
+        <h2 class="section-title" style="text-align:center;">Simple, credit-based pricing</h2>
+        <p class="section-sub" style="text-align:center; max-width: 600px; margin: 0 auto 40px;">
+          Buy credits that get stored in your secure wallet. Every time you use a feature, credits are used seamlessly. No subscriptions.
+        </p>
+        <div class="pricing-card">
+          <div class="pc-header">
+            <h3>Credit Wallet</h3>
+            <div class="pc-price">500 <span class="pc-sub">Credits</span></div>
+          </div>
+          <div class="pc-body">
+            <ul class="pc-features">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Stock Analysis — 10 Credits</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Portfolio Doctor — 20 Credits</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Financial Advisor — 15 Credits</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> ELI15 Translation — 5 Credits</li>
+            </ul>
+            <a href="#cta" class="btn-primary" style="width: 100%; justify-content: center;">Buy Credits</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- End middle-wrapper -->
 
   <!-- CTA -->
   <section class="cta-section" id="cta">
-    <div class="cta-inner">
-      <div class="cta-glow"></div>
+    <div class="cta-inner" style="background: transparent; border: none; padding: 40px;">
       <div class="section-label reveal">Get Started</div>
       <h2 class="section-title reveal" style="text-align:center;">Ready to make smarter<br>investment decisions?</h2>
-      <p class="cta-sub reveal">Sign in with Google. No forms, no questionnaires. Start analysing stocks in under 60 seconds.</p>
-      <div class="cta-actions reveal">
+      <div class="cta-actions reveal" style="margin-top: 32px;">
         <a href="#" class="btn-primary btn-large">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23Z" fill="#34A853"/>
-            <path d="M5.84 14.09a6.87 6.87 0 0 1 0-4.17V7.08H2.18a11.52 11.52 0 0 0 0 9.84l3.66-2.84Z" fill="#FBBC05"/>
-            <path d="M12 5.38a6.23 6.23 0 0 1 4.4 1.72l3.33-3.33A11.08 11.08 0 0 0 12 1 11.48 11.48 0 0 0 2.18 7.08l3.66 2.84c.87-2.6 3.3-4.54 6.16-4.54Z" fill="#EA4335"/>
-          </svg>
-          <span>Sign in with Google — It's Free</span>
+          <span>Get Started</span>
         </a>
       </div>
       <p class="cta-disclaimer reveal">Fintur is an educational and decision-support tool. Not a SEBI-registered investment advisor. All outputs carry appropriate disclaimers.</p>
@@ -605,16 +493,16 @@
       <div class="footer-links-grid">
         <div class="footer-col">
           <div class="footer-col-title">Product</div>
-          <a href="#features">Stock Analysis</a>
-          <a href="#features">ELI15 Mode</a>
-          <a href="#features">Portfolio Doctor</a>
-          <a href="#advisor">Financial Advisor</a>
+          <a href="#explain-stock">Stock Analysis</a>
+          <a href="#explain-eli15">ELI15 Mode</a>
+          <a href="#explain-portfolio">Portfolio Doctor</a>
+          <a href="#explain-advisor">Financial Advisor</a>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Company</div>
           <a href="#">About</a>
+          <a href="#">Pricing</a>
           <a href="#">Blog</a>
-          <a href="#">Careers</a>
           <a href="#">Contact</a>
         </div>
         <div class="footer-col">
@@ -627,7 +515,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Fintur. All rights reserved.</span>
-      <span>Made for Indian retail investors 🇮🇳</span>
+      <span>Made for Indian retail investors</span>
     </div>
   </footer>
 
